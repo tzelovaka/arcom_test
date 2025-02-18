@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<input type="number" id="digit" name="digit" min="1" />
+<button onclick="test()">Проверить</button>
+</body>
+<script>
+    function test() {
+        const digit = parseInt(document.getElementById('digit').value);
+        if (isNaN(digit) || digit <= 1) { //проверка на валидность и 1 как исключение
+            alert('Введите корректное число больше 1');
+            return;
+        }
+        if (digit <= 3) { // все числа, которые прошли предыдущее условие, но меньше 4 - простые
+            alert('Число простое');
+            return;
+        }
+        if (digit % 2 === 0) { //все чётные числа делятся на 2, поэтому простыми быть не могут
+            alert('Число не простое');
+            return;
+        }
+        for (let i = 3; i * i <= digit; i += 2) { // проверяются только нечетные делители (так нечётное число не может делиться на чётное) до квадратного корня числа (так как числа больше корня не могут подойти)
+            if (digit % i === 0) {
+                alert('Число не простое');
+                return;
+            }
+        }
+        alert('Число простое');
+    }
+</script>
+</html>
